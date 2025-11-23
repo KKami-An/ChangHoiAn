@@ -1,1 +1,79 @@
-# ddd
+<div align="center">
+
+# 👋 안녕하세요!
+
+![Profile Views](https://komarev.com/ghpvc/?username=yourusername&color=blue)
+![GitHub followers](https://img.shields.io/github/followers/yourusername?style=social)
+![GitHub stars](https://img.shields.io/github/stars/yourusername?style=social)
+
+</div>
+
+---
+
+## 🧑‍💻 About Me
+**직업:** 임베디드 시스템 & IoT 개발자  
+**최근 프로젝트:** 태양광 추적 시스템, IoT 기반 실시간 침입 감지 시스템, Raspberry Pi5 + Hailo 기반 AI 면접 시스템  
+**기술 스택:**  
+
+<p align="center">
+<img src="https://img.shields.io/badge/-STM32-03234B?style=flat&logo=stmicroelectronics&logoColor=white" />
+<img src="https://img.shields.io/badge/-RaspberryPi-A22846?style=flat&logo=raspberrypi&logoColor=white" />
+<img src="https://img.shields.io/badge/-Arduino-00979D?style=flat&logo=arduino&logoColor=white" />
+<img src="https://img.shields.io/badge/-ROS2-22314E?style=flat&logo=ros&logoColor=white" />
+<img src="https://img.shields.io/badge/-Linux-FCC624?style=flat&logo=linux&logoColor=black" />
+<img src="https://img.shields.io/badge/-MySQL-4479A1?style=flat&logo=mysql&logoColor=white" />
+<img src="https://img.shields.io/badge/-Bluetooth-0082FC?style=flat&logo=bluetooth&logoColor=white" />
+<img src="https://img.shields.io/badge/-WiFi-000000?style=flat&logo=wifi&logoColor=white" />
+<img src="https://img.shields.io/badge/-HailoAI-FF6F00?style=flat" />
+<img src="https://img.shields.io/badge/-ChatGPT-00A67E?style=flat" />
+</p>
+
+📫 **연락처:** [이메일 주소]
+
+---
+
+## 🚀 주요 프로젝트
+
+### ☀️ 태양광 추적 시스템
+![Solar Tracker](https://via.placeholder.com/800x400.png?text=Solar+Tracking+System+Image)
+- STM32 기반으로 태양 위치 추적 → 효율적 에너지 수집
+- 서보 모터 제어 및 센서 데이터 처리
+
+### 🔐 IoT 기반 실시간 침입 감지 시스템
+![IoT Security](https://via.placeholder.com/800x400.png?text=IoT+Security+System+Image)
+- STM32 GPIO 인터럽트로 바닥 버튼 입력 감지
+- Wi-Fi로 Raspberry Pi → MySQL DB 저장
+- 침입 시 Bluetooth로 Arduino 제어 → 부저, LED, LCD
+
+### 🤖 Raspberry Pi5 + Hailo 기반 AI 면접 시스템
+![AI Interview](https://via.placeholder.com/800x400.png?text=AI+Interview+System+Image)
+- Raspberry Pi5 + Hailo 가속기로 정량적 AI 면접 구현
+- 웹캠으로 자세·표정 XML 저장
+- PC 클라이언트가 XML을 받아 LLM(ChatGPT) 분석 → 면접 점수 제공
+- 면접 시작/종료 명령 Raspberry Pi로 전송, 녹화 및 데이터 처리 자동화
+
+---
+
+## 🔮 앞으로 할 계획
+- 🛠 ROS2 + 펌웨어 + 커널 기반 터틀봇 통신 시스템
+  - 터틀봇과 MCU 간 통신 방식 이해
+  - USB 디바이스 파일을 통해 센서값 수신 및 모터 제어
+  - ROS2 노드와 펌웨어 간 실시간 데이터 교환 구조 설계
+
+---
+
+### 💡 관심 분야
+Embedded System | IoT | Motor Control | ROS2 | Linux Kernel | AI Edge Computing
+
+### 📫 연락
+Email: [이메일 주소]
+
+---
+
+<div align="center">
+
+### ⭐ GitHub Stats
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=yourusername&layout=compact&theme=radical)
+![GitHub stats](https://github-readme-stats.vercel.app/api?username=yourusername&show_icons=true&theme=radical)
+
+</div>
