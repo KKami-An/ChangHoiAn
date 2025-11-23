@@ -32,16 +32,18 @@
 ## 🚀 주요 프로젝트
 
 ### ☀️ 태양광 추적 시스템
+(https://github.com/ChangHoiAn/Project-Solar-Tracking-system)
 - STM32 기반으로 태양 위치 추적 → 효율적 에너지 수집
 - 서보 모터 제어 및 센서 데이터 처리
 
 ### 🔐 IoT 기반 실시간 침입 감지 시스템
+(https://github.com/ChangHoiAn/Project-Instruction-Detection-system)
 - STM32 GPIO 인터럽트로 바닥 버튼 입력 감지
 - Wi-Fi로 Raspberry Pi → MySQL DB 저장
 - 침입 시 Bluetooth로 Arduino 제어 → 부저, LED, LCD
 
 ### 🤖 Raspberry Pi5 + Hailo 기반 AI 면접 시스템
-**[AI 면접 시스템]** (https://github.com/ChangHoiAn/Project-AI-Interview-system)
+(https://github.com/ChangHoiAn/Project-AI-Interview-system)
 - Raspberry Pi5 + Hailo 가속기로 정량적 AI 면접 구현
 - 웹캠으로 자세·표정 XML 저장
 - PC 클라이언트가 XML을 받아 LLM(Gemini) 분석 → 면접 점수 제공
