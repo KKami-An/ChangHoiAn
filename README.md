@@ -23,7 +23,6 @@
 <img src="https://img.shields.io/badge/-Bluetooth-0082FC?style=flat&logo=bluetooth&logoColor=white" />
 <img src="https://img.shields.io/badge/-WiFi-000000?style=flat&logo=wifi&logoColor=white" />
 <img src="https://img.shields.io/badge/-HailoAI-FF6F00?style=flat" />
-<img src="https://img.shields.io/badge/-ChatGPT-00A67E?style=flat" />
 </p>
 
 📫 **연락처:** [changhoian99@gmail.com]
@@ -44,7 +43,7 @@
 ### 🤖 Raspberry Pi5 + Hailo 기반 AI 면접 시스템
 - Raspberry Pi5 + Hailo 가속기로 정량적 AI 면접 구현
 - 웹캠으로 자세·표정 XML 저장
-- PC 클라이언트가 XML을 받아 LLM(ChatGPT) 분석 → 면접 점수 제공
+- PC 클라이언트가 XML을 받아 LLM(Gemini) 분석 → 면접 점수 제공
 - 면접 시작/종료 명령 Raspberry Pi로 전송, 녹화 및 데이터 처리 자동화
 
 ### ⚙️ C2000사 모터 제어 및 MATLAB Simulink 시뮬레이션
