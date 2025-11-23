@@ -2,7 +2,7 @@
 
 # 👋 안녕하세요!
 
-
+임베디드 시스템 & IoT 개발자 **ChangHoiAn**입니다.
 
 </div>
 
@@ -41,7 +41,7 @@
 - 침입 시 Bluetooth로 Arduino 제어 → 부저, LED, LCD
 
 ### 🤖 Raspberry Pi5 + Hailo 기반 AI 면접 시스템
-**GitHub Repository:** ChangHoiAn/Project-AI-Interview-system
+**GitHub Repository:** [ChangHoiAn/Project-AI-Interview-system](https://github.com/ChangHoiAn/Project-AI-Interview-system)
 - Raspberry Pi5 + Hailo 가속기로 정량적 AI 면접 구현
 - 웹캠으로 자세·표정 XML 저장
 - PC 클라이언트가 XML을 받아 LLM(Gemini) 분석 → 면접 점수 제공
@@ -50,7 +50,7 @@
 ### ⚙️ C2000사 모터 제어 및 MATLAB Simulink 시뮬레이션
 - PMSM모터 속도 제어 Matlab simulink로 구성 및 실행
 - C2000사의 TMS MCU를 이용하여 속도제어를 구현
-  
+
 ---
 
 ## 🔮 앞으로 할 계획
@@ -72,7 +72,7 @@ Email: [changhoian99@gmail.com]
 <div align="center">
 
 ### ⭐ GitHub Stats
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=yourusername&layout=compact&theme=radical)
-![GitHub stats](https://github-readme-stats.vercel.app/api?username=yourusername&show_icons=true&theme=radical)
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=ChangHoiAn&layout=compact&theme=radical)
+![GitHub stats](https://github-readme-stats.vercel.app/api?username=ChangHoiAn&show_icons=true&theme=radical)
 
 </div>
