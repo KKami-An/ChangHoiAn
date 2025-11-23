@@ -41,6 +41,7 @@
 - 침입 시 Bluetooth로 Arduino 제어 → 부저, LED, LCD
 
 ### 🤖 Raspberry Pi5 + Hailo 기반 AI 면접 시스템
+**GitHub Repository:** ChangHoiAn/Project-AI-Interview-system
 - Raspberry Pi5 + Hailo 가속기로 정량적 AI 면접 구현
 - 웹캠으로 자세·표정 XML 저장
 - PC 클라이언트가 XML을 받아 LLM(Gemini) 분석 → 면접 점수 제공
