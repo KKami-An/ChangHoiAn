@@ -45,20 +45,18 @@ MCU <-->|UART| PC[PC QT App]
 - **통신**
   - **USB Vendor**: 구조화된 명령/응답/상태 처리
   - **MSC**: 파일 기반 워크플로(로그/스크립트/설정 교환 등)
-  - **HID**: 버튼/로터리 등 입력을 키 이벤트로 수신(옵션)
 
 ### 2) STM32 / Black Pill (CUSTOM_USB Firmware)
 - **역할**: USB Composite Device + UART 브릿지
 - **USB 인터페이스**
-  - **Vendor**: PC ↔ STM32 명령/상태 통신
+  - **Vendor**: PC ↔ STM32 파일 상태 통신 + Turtlebot에 구조화된 명령어 전달
   - **MSC (Mass Storage)**: 파일 교환 채널(옵션/확장)
-  - **HID (Keyboard)**: 물리 입력을 PC 키 입력으로 전달(옵션)
 - **UART 인터페이스**
   - 정상: RPi daemon으로 명령 전달 / 응답 수신
   - 비상: RPi 로그/쉘 스트림을 PC로 브릿지
 
 ### 3) Raspberry Pi (TurtleBot, Ubuntu Server) + daemon
-- **역할**: UART로 들어온 명령을 파싱/실행/스케줄링하고 상태/로그를 반환
+- **역할**: Vendor나 UART로 들어온 명령을 파싱/실행/스케줄링하고 상태/로그를 반환
 - **명령 분류**
   - `S` (Static): 즉시 실행 단발 명령 (예: `apt update`)
   - `D` (Delay): 지연이 필요한 명령 (예: “5m 이동 후 다음 단계”)
@@ -156,7 +154,7 @@ stateDiagram-v2
 
 ## 🔌 통신 프로토콜 개요 (Protocol)
 
-### 1) USB Vendor (PC ↔ STM32)
+### 1) USB Vendor (PC ↔ STM32 ↔ TurtleBot)
 - 목적: 구조화된 명령/응답/상태를 안정적으로 전달
 - 문서용 패킷 형태 예시
   - `TYPE` (S/D/C)
