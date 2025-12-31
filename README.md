@@ -45,7 +45,7 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-  KRPI[RPi: Linux Kernel Driver\n/dev/custom_usb] -->|USB Vendor IN/OUT| MCU[STM32 Firmware\n]
+  KRPI[RPi: Linux Kernel Driver /dev/custom_usb] -->|USB Vendor IN/OUT| MCU[STM32 Firmware]
   MCU <-->|UART| RPI[Raspberry Pi\nUbuntu Server]
   RPI -->|exec| SYS[(Linux / ROS2 / TurtleBot)]
   SYS -->|logs| RPI
