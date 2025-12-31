@@ -94,6 +94,6 @@
 
 ## ⭐ GitHub Stats
 
-<img src="./github-metrics.svg" alt="GitHub Metrics" />
+
 
 </div>
