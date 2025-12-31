@@ -141,13 +141,12 @@ stateDiagram-v2
   [*] --> RootMode
 
   RootMode --> LinuxMode: key
-  RootMode --> EmergencyMode: long-press
+  RootMode --> EmergencyMode: key
 
-  LinuxMode --> WriteMode: key
-  WriteMode --> Writing: rotary
-  Writing --> Complete: key
-  Complete --> LinuxMode: key
-
+  LinuxMode --> WriteMode: rotary
+  LinuxMode --> NoWriteMode: rotary
+  WriteMode --> LinuxMode: key
+  NoWriteMode --> LinuxMode: key
   EmergencyMode --> RootMode: key
 ```
 
