@@ -29,12 +29,11 @@
 
 ```mermaid
 flowchart LR
-PC[PC QT App] -->|Vendor Write cmd| MCU[CUSTOM_USB Firmware]
-MCU <-->|UART| RPI[Raspberry Pi Ubuntu Server - TurtleBot]
-RPI -->|exec| SYS[(Linux / ROS2 / TurtleBot)]
-RPI -->|logs| MCU
-MCU -->|Vendor Read cmd| PC
-MCU <-->|UART| PC[PC QT App]
+  PC[PC\nQT App] <-->|USB Composite\nVendor + MSC + HID| MCU[Black Pill / STM32\nCUSTOM_USB Firmware]
+  MCU <-->|UART| RPI[Raspberry Pi\nUbuntu Server (TurtleBot)]
+  RPI -->|exec| SYS[(Linux / ROS2 / TurtleBot)]
+  RPI -->|logs| MCU -->|UART bridge| PC
+```
 
 ---
 
