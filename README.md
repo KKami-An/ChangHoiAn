@@ -28,30 +28,108 @@
 
 ## 🏛️ 시스템 아키텍처 (System Architecture)
 
-CUSTOM_USB는 “한 번에 한 쪽에만 USB로 연결되는 STM32” 특성 때문에, 실사용 흐름을 **2단계**로 보는 게 이해가 쉽습니다.
-
-### 1) PC 연결 단계 (명령 작성/저장)
-
 ```mermaid
 flowchart LR
-  QT[PC: QT App] -->|write 256B cmd| KPC[PC: Linux Kernel Driver /dev/custom_usb]
-  KPC -->|USB Vendor OUT| MCU[STM32 Firmware]
-  MCU -->|save cmd to internal/SD| MCU
-  MCU -->|optional: log/file| MSC1[USB MSC]
-  MSC1 --> QT
-```
+    %% 스타일 정의
+    classDef pc fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:black;
+    classDef mcu fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,color:black;
+    classDef rpi fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:black;
+    classDef usb fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,stroke-dasharray: 5 5,color:black;
 
-### 2) Robot 연결 단계 (명령 실행/로그 회수)
+    %% ==========================================
+    %% 1. PC 영역
+    %% ==========================================
+    subgraph PC_Group [💻 PC ]
+        direction TB
+        QT[**QT App**\nGUI Controller]
+        TERM[**Terminal**\nEmergency Shell Access]
+        K_PC[**Linux Kernel Driver**\n/dev/custom_usb_pc]
+        
+        QT <-->|read/write| K_PC
+        QT <-->|mount| MSC_Drive[MSC Drive]
+    end
 
-```mermaid
-flowchart LR
-  KRPI[RPi: Linux Kernel Driver /dev/custom_usb] -->|USB Vendor IN/OUT| MCU[STM32 Firmware]
-  MCU <-->|UART| RPI[Raspberry Pi\nUbuntu Server]
-  RPI -->|exec| SYS[(Linux / ROS2 / TurtleBot)]
-  SYS -->|logs| RPI
-  RPI -->|store logs| MCU
-  MCU -->|USB MSC| MSC2[USB MSC]
-  MSC2 --> PC2[PC]
+    %% ==========================================
+    %% 2. USB 연결 (PC <-> STM32)
+    %% ==========================================
+    subgraph USB_Link1 [USB Composite Link]
+        direction TB
+        L_VEN1[**Vendor Interface**\nMain Data Stream]
+        L_CDC[**CDC Interface**\nEmergency UART Bridge]
+        L_MSC[**MSC Interface**\nLog Storage]
+    end
+
+    %% ==========================================
+    %% 3. STM32 (Black Pill) 영역
+    %% ==========================================
+    subgraph STM32_Group [🕹️ Black Pill ]
+        direction TB
+        TINY[**TinyUSB Stack**\nComposite Device]
+        
+        subgraph Logic [Firmware Logic]
+            FW_VEN[Vendor Logic\nPassthrough]
+            FW_CDC[CDC Logic\nUART Bridge]
+            FW_MSC[MSC Logic\nSD Card I/O]
+        end
+    end
+
+    %% ==========================================
+    %% 4. 연결 (STM32 <-> RPi)
+    %% ==========================================
+    subgraph Link_RPi [RPi Connection]
+        direction TB
+        L_VEN2[**USB Vendor**\n/dev/ttyUSB or Custom]
+        L_UART[**Physical UART**\nGPIO 14/15]
+    end
+
+    %% ==========================================
+    %% 5. Raspberry Pi 영역
+    %% ==========================================
+    subgraph RPI_Group [🤖 Raspberry Pi ]
+        direction TB
+        K_RPI[**Linux Kernel Driver**\n/dev/custom_usb_rpi]
+        DAEMON[**Daemon Process**\nCommand Parser]
+        AGETTY[**agetty**\nSerial Console]
+        
+        subgraph OS [System]
+            ROS2[ROS 2 Nodes]
+            BASH[Bash Shell]
+        end
+    end
+
+    %% ==========================================
+    %% 흐름 연결 (Wiring)
+    %% ==========================================
+
+    %% PC -> USB Link
+    K_PC <==>|Bulk Transfer| L_VEN1
+    TERM <-->|Virtual COM| L_CDC
+    MSC_Drive -.-> L_MSC
+
+    %% USB Link -> STM32
+    L_VEN1 <==> FW_VEN
+    L_CDC <--> FW_CDC
+    L_MSC -.-> FW_MSC
+    TINY --- Logic
+
+    %% STM32 -> RPi Link
+    FW_VEN <==>|Bulk Transfer| L_VEN2
+    FW_CDC <-->|TX/RX Raw| L_UART
+
+    %% RPi Link -> RPi Internal
+    L_VEN2 <==> K_RPI
+    L_UART <--> AGETTY
+
+    %% RPi Internal Process
+    K_RPI <==>|Character Dev I/O| DAEMON
+    DAEMON -->|S, D, C Cmd| ROS2
+    AGETTY <-->|Login/Input| BASH
+
+    %% 스타일 적용
+    class PC_Group,QT,K_PC,TERM,MSC_Drive pc;
+    class STM32_Group,TINY,FW_VEN,FW_CDC,FW_MSC mcu;
+    class RPI_Group,K_RPI,DAEMON,AGETTY,ROS2,BASH rpi;
+    class USB_Link1,L_VEN1,L_CDC,L_MSC,Link_RPi,L_VEN2,L_UART usb;
 ```
 
 ---
