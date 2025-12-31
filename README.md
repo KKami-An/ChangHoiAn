@@ -38,7 +38,7 @@ flowchart LR
     classDef usb fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,stroke-dasharray: 5 5,color:black;
 
     %% 1. PC
-    subgraph PC_Group [💻 PC (Client)]
+    subgraph PC_Group [💻 PC ]
         direction TB
         QT[**QT App**\nGUI Controller]
         K_PC[**Linux Kernel Driver**\n/dev/custom_usb_pc]
@@ -94,7 +94,7 @@ flowchart LR
     classDef usb fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,stroke-dasharray: 5 5,color:black;
 
     %% 1. PC
-    subgraph PC_Group [💻 PC (Admin)]
+    subgraph PC_Group [💻 PC ]
         direction TB
         TERM[**Terminal**\nPutty / Qt Terminal]
         MSC_Drive[**MSC Drive**\nLog Storage]
