@@ -20,7 +20,6 @@
 - TurtleBot(Raspberry Pi) 제어를 PC에서 더 안정적이고 구조적으로 수행
 - USB로 명령을 전달하고, Raspberry Pi의 daemon이 이를 파싱/실행하도록 구성
 - SSH가 끊기거나 네트워크가 불안정해도 **UART를 통해 로그/쉘을 PC로 전달**하여 복구 가능
-- 버튼/로터리 입력 등을 **HID(키보드)** 로 PC에 전달해 UI/제어를 단순화
 - **MSC(USB Mass Storage)** 로 로그/스크립트/설정 파일을 교환하는 워크플로 지원(옵션)
 
 ---
