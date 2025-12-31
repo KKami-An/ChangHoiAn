@@ -34,8 +34,8 @@ CUSTOM_USB는 “한 번에 한 쪽에만 USB로 연결되는 STM32” 특성 �
 
 ```mermaid
 flowchart LR
-  QT[PC: QT App] -->|write 256B cmd| KPC[PC: Linux Kernel Driver\n/dev/custom_usb]
-  KPC -->|USB Vendor OUT| MCU[STM32 Firmware\n(CUSTOM_USB)]
+  QT[PC: QT App] -->|write 256B cmd| KPC[PC: Linux Kernel Driver /dev/custom_usb]
+  KPC -->|USB Vendor OUT| MCU[STM32 Firmware]
   MCU -->|save cmd to internal/SD| MCU
   MCU -->|optional: log/file| MSC1[USB MSC]
   MSC1 --> QT
@@ -45,12 +45,12 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-  KRPI[RPi: Linux Kernel Driver\n/dev/custom_usb] -->|USB Vendor IN/OUT| MCU[STM32 Firmware\n(CUSTOM_USB)]
-  MCU <-->|UART| RPI[Raspberry Pi\nUbuntu Server (TurtleBot)]
+  KRPI[RPi: Linux Kernel Driver\n/dev/custom_usb] -->|USB Vendor IN/OUT| MCU[STM32 Firmware\n]
+  MCU <-->|UART| RPI[Raspberry Pi\nUbuntu Server]
   RPI -->|exec| SYS[(Linux / ROS2 / TurtleBot)]
   SYS -->|logs| RPI
   RPI -->|store logs| MCU
-  MCU -->|USB MSC (optional)| MSC2[USB MSC]
+  MCU -->|USB MSC| MSC2[USB MSC]
   MSC2 --> PC2[PC]
 ```
 
