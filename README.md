@@ -35,7 +35,7 @@ RPI -->|exec| SYS[(Linux / ROS2 / TurtleBot)]
 RPI -->|logs| MCU
 MCU -->|Vendor Read cmd| PC
 MCU <-->|UART| PC[PC QT App]
-```
+
 ---
 
 ## 🧱 구성 요소 (Components)
@@ -70,40 +70,22 @@ MCU <-->|UART| PC[PC QT App]
 
 ```mermaid
 sequenceDiagram
-	actor User
-	participant Qt
-	participant PC Driver
-	participant STM32
-	participant Robot Driver
-	participant Daemon
-	
-	User -->> STM32: Connect to User PC
-	STM32 ->> PC Driver: USB descriptor
-	Note over PC Driver, STM32: MSC+Vendor
-	PC Driver ->> Qt: Connected
-	User ->> Qt: Write command
-	Qt ->> Qt: Compile
-	Qt ->> PC Driver: Write Struct
-	PC Driver ->> STM32: Send Struct
-	Note over PC Driver, STM32: Vendor
-	STM32 ->> STM32: Save Struct
-	
-	User -->> STM32: Disconnect from User PC
-	User -->> STM32: Connect to Robot
-	
-	STM32 ->> Robot Driver: USB descriptor
-	Note over Robot Driver, STM32: MSC+Vendor
-	Robot Driver ->> Daemon: Connected
-	Daemon ->> Robot Driver: Read Struct
-	
-	User -->> STM32: Click Button
-	STM32 ->> Robot Driver: Send Struct
-	Note over Robot Driver, STM32: Vendor
-	Robot Driver ->> Daemon: Read Struct
-	Daemon ->> Daemon: Exacute Commend
-	Daemon ->> STM32: Save Log
-	Note over Daemon, STM32: MSC	
-	
+  participant U as User
+  participant PC as PC(QT)
+  participant MCU as STM32(CUSTOM_USB)
+  participant RPI as RPi Daemon
+
+  U->>PC: 명령 작성/실행
+  PC->>MCU: USB Vendor Packet 전송
+  MCU->>RPI: UART로 명령 전달
+  RPI->>RPI: S/D/C 파싱 및 실행/스케줄링
+  RPI-->>MCU: 실행 결과/상태/로그
+  MCU-->>PC: USB Vendor로 ACK/상태 전달
+
+  Note over MCU,RPI: SSH 끊김/네트워크 장애 시
+  RPI-->>MCU: UART 로그 스트림
+  MCU-->>PC: UART->PC 브릿지(긴급 디버깅)
+```
 
 ---
 
