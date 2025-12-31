@@ -10,7 +10,7 @@
 
 ## ✨ 한 줄 요약
 
-**PC(QT) ↔ (USB Composite: Vendor + MSC + HID) ↔ STM32(Black Pill) ↔ (UART) ↔ Raspberry Pi(TurtleBot, Ubuntu Server)**  
+**PC(QT) ↔ (USB Composite: Vendor + MSC) ↔ STM32(Black Pill) ↔ (UART) ↔ Raspberry Pi(TurtleBot, Ubuntu Server)**  
 구조로 **명령 전달 / 파일 교환 / 키 이벤트 입력 / 긴급 로그 브릿지**를 제공하는 프로젝트입니다.
 
 ---
@@ -41,7 +41,7 @@ MCU <-->|UART| PC[PC QT App]
 ## 🧱 구성 요소 (Components)
 
 ### 1) PC (QT App)
-- **역할**: 사용자 UI 제공, 명령 작성/전송, 결과/로그 표시
+- **역할**: 사용자 UI 제공, 명령 작성/전송, 명령 다이어그램 표시
 - **통신**
   - **USB Vendor**: 구조화된 명령/응답/상태 처리
   - **MSC**: 파일 기반 워크플로(로그/스크립트/설정 교환 등)
@@ -56,7 +56,7 @@ MCU <-->|UART| PC[PC QT App]
   - 비상: RPi 로그/쉘 스트림을 PC로 브릿지
 
 ### 3) Raspberry Pi (TurtleBot, Ubuntu Server) + daemon
-- **역할**: Vendor나 UART로 들어온 명령을 파싱/실행/스케줄링하고 상태/로그를 반환
+- **역할**: Vendor나 UART로 들어온 명령을 파싱/실행/스케줄링하고 긴급시에 UART로 쉘 연결
 - **명령 분류**
   - `S` (Static): 즉시 실행 단발 명령 (예: `apt update`)
   - `D` (Delay): 지연이 필요한 명령 (예: “5m 이동 후 다음 단계”)
@@ -129,9 +129,7 @@ daemon이 처리하는 명령은 3종으로 나뉩니다.
 
 ---
 
-## 🧭 디바이스 모드 (예: Linux / Emergency)
-
-(버튼/로터리 입력으로 모드 전환 UX가 있다면 아래처럼 문서화하면 발표/인수인계가 편합니다.)
+## 🧭 디바이스 모드 (Linux / Emergency)
 
 ```mermaid
 stateDiagram-v2
@@ -148,20 +146,20 @@ stateDiagram-v2
 ```
 
 - **LinuxMode**: 정상 제어 모드(PC → Vendor → daemon 실행)
-- **EmergencyMode**: SSH/네트워크 장애 시 UART 로그/쉘 확보 모드
+- **EmergencyMode**: SSH/네트워크 장애 시 UART 쉘 확보 모드
 
 ---
 
 ## 🔌 통신 프로토콜 개요 (Protocol)
 
-### 1) USB Vendor (PC ↔ STM32 ↔ TurtleBot)
+### 1) USB Vendor 
 - 목적: 구조화된 명령/응답/상태를 안정적으로 전달
 - 문서용 패킷 형태 예시
-  - `TYPE` (S/D/C)
-  - `ID` (명령 ID)
-  - `LEN`
-  - `PAYLOAD`
-  - `CRC` (선택)
+  - 0x00 4 `magic` (0xDEADBEEF)
+  - 0x04 1 info`ID` (bit-fields)
+  - 0x05 2 cmd_len
+  - 0x07 249 cmd_statement
+  - Total 256 bytes
 
 ```text
 [SOF][TYPE][ID][LEN][PAYLOAD...][CRC][EOF]
@@ -242,6 +240,12 @@ cd pc_client_qt
 ---
 
 ## 🧯 트러블슈팅 (Troubleshooting)
+
+- **STM32에서 보내준 명령어를 커널 영역엥서 read가 안되는 상황**
+  - 커널영역에서 magic번호가 달라 검사 함수에서 block됨 
+
+- **SDIO 통신이 잘 안되는 상황**
+  - 기본 세팅에서 SDIO 환경 바꾸기 보다는 main에서 따로 SDIO 환경 세팅
 
 - **USB Composite가 정상적으로 안 잡힘 (Vendor/MSC/HID 일부만 뜸)**
   - 디스크립터/인터페이스 번호 충돌 확인
