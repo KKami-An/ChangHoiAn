@@ -1,4 +1,4 @@
-# CUSTOM_USB
+# USB-MACRO
 
 ***PC(QT)에서 TurtleBot(Raspberry Pi)를 USB 기반으로 제어/자동화하고, SSH/네트워크가 끊겨도 UART로 “긴급 통신(로그/쉘)”을 유지하는 커스텀 USB 브릿지 시스템***
 
