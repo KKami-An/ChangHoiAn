@@ -9,10 +9,13 @@
 ## 🧑‍💻 About Me
 
 - **직업:** 임베디드 시스템 & IoT 개발자  
-- **최근 프로젝트:**  
-  - 태양광 추적 시스템  
+- **최근 프로젝트:**
+  - 원클릭 로봇 실행 USB
+  - 여러개의 모듈로 시계 device driver 제작
+  - Raspberry Pi5 + Hailo 기반 AI 면접 시스템
   - IoT 기반 실시간 침입 감지 시스템  
-  - Raspberry Pi5 + Hailo 기반 AI 면접 시스템  
+  - 태양광 추적 시스템  
+
 
 ---
 
